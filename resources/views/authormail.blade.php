@@ -4,7 +4,6 @@
     <title></title>
 </head>
 <body>
-    <h1>{{ $testMailData['title'] }}</h1>
-    <p>{{ $testMailData['body'] }}</p>
+    <h1>Hello</h1>
 </body>
 </html>

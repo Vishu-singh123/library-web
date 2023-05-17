@@ -11,6 +11,7 @@ use App\Models\ReviewUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\AuthorEmail;
 
 class ReviewController extends Controller
 {
@@ -31,12 +32,13 @@ class ReviewController extends Controller
         // dd($author);
 
 
-        $testMailData = [
-            'title' => 'The user has give rating and review on your book',
-            'body' => 'user and rated your book : ' . $request->rating . 'Star and  the comment is : ' . $request->comment
-        ];
-
-        Mail::to($author['email'])->send(new SendMail($testMailData));
+        // $testMailData = [
+        //     'title' => 'The user has give rating and review on your book',
+        //     'body' => 'user and rated your book : ' . $request->rating . 'Star and  the comment is : ' . $request->comment
+        // ];
+        // dd($author['email']);
+        // Mail::to($author['email'])->send(new SendMail($testMailData));
+        dispatch(new AuthorEmail($author->email));
 
         // $to_name = $author['name'];
         // $to_email = $author['email'];
