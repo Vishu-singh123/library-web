@@ -18,6 +18,8 @@ class GenerSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table("geners")->insert([
                 "name" => $faker->name(),
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
             ]);
         }
     }

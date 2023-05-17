@@ -22,6 +22,8 @@ class AuthorbookSeeder extends Seeder
             DB::table("author_book")->insert([
                 'author_id' => $i,
                 'book_id' => $i,
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
             ]);
         }
     }

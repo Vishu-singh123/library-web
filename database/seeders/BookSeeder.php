@@ -24,6 +24,8 @@ class BookSeeder extends Seeder
                 "image" => $faker->imageUrl(), 
                 'category_id' => $faker->randomElement(Category::pluck('id')),
                 'geners_id' => $faker->randomElement(Gener::pluck('id')),
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString(),
                 // "category_id" => mt_rand(1,10),  
                 // "geners_id" => mt_rand(1,10)  
             ]);
