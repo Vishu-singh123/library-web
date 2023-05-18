@@ -8,10 +8,10 @@
                 <div class="col-md-4">
                     <a href="{{ 'bookdetail/' . $item['bookId'] }}">
                         <div class="card mb-4">
-                            <img src="{{ $item['bookImage'] }}" class="card-img-top" alt="image" height="300px" />
+                            <img src="{{ $item['bookImage'] }}" class="card-img-top" alt="image" height="500px" />
                             <div class="card-body">
-                                <h5 class="card-title">{{ $item['bookName'] }}</h5>
-                                <p class="card-text"><strong>Author:</strong>
+                                <h3 class="card-title">{{ $item['bookName'] }}</h3>
+                                <p class="card-text"><strong>Author:-</strong>
                                     @foreach ($item['bookAuthor'] as $author)
                                         {{ trim($author['name'], ", ") }},
                                     @endforeach
