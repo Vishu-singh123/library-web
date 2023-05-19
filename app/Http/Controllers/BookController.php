@@ -17,52 +17,49 @@ class BookController extends Controller
         // dd($books);
         $allBookData = [];
         $a = 0;
-        // if (count($books)) {
-            foreach ($books as $book) {
-                // dd($book);
-                $allBookData[$a]['bookId'] =Helper::encrypt($book['id']);
-                $allBookData[$a]['bookName'] = $book['name'];
-                $allBookData[$a]['bookImage'] = $book['image'];
-                $i = 0;
-                $j = 0;
-                if (isset($book['authors'])) {
-                    foreach ($book['authors'] as $authors) {
-                        $allBookData[$a]['bookAuthor'][$j]['name'] = $authors['name'];
-                        $j++;
-                    }
+
+        foreach ($books as $book) {
+            $allBookData[$a]['bookId'] = $book['id'];
+            $allBookData[$a]['bookName'] = $book['name'];
+            $allBookData[$a]['bookImage'] = $book['image'];
+            if (isset($book['authors'])) {
+                $name = [];
+                foreach ($book['authors'] as $authors) {
+                    array_push($name, $authors['name']);
                 }
-                $allBookData[$a]['bookGener'] = $book['gener']['name'];
-                $a++;
             }
+            $allBookData[$a]['bookAuthor'] = implode(', ', $name);
+            $allBookData[$a]['bookGener'] = $book['gener']['name'];
+            $a++;
+        }
         // dd($allBookData);
         return view('allbooks', compact('allBookData'));
     }
     public function details($id)
     {
         // dd(Helper::decrypt($id));
-        $books = Book::where('id', Helper::decrypt($id))->with(['authors', 'category', 'gener', 'reviews'])->first();
-        $averageRating = Review::where('Book_id', Helper::decrypt($id))->avg('rating');
+        $books = Book::where('id', decrypt($id))->with(['authors', 'category', 'gener', 'reviews'])->first();
+        $averageRating = Review::where('Book_id', decrypt($id))->avg('rating');
         // dd($books);
         $bookData = [];
-        $bookData['bookId'] = Helper::encrypt($books['id']);
+        $bookData['bookId'] = $books['id'];
         $bookData['bookName'] = $books['name'];
         $bookData['bookImage'] = $books['image'];
-        $i = 0;
-        $j = 0;
+        $name = [];
         if (isset($books['authors'])) {
             foreach ($books['authors'] as $authors) {
-                $bookData['bookAuthor'][$j]['name'] = $authors['name'];
-                $j++;
+                array_push($name, $authors['name']);
             }
         }
-        // $bookData['bookAuthor'] = $books['authors'];
+        $bookData['bookAuthor'] = implode(', ', $name);
         $bookData['category'] = $books['category']['name'];
         $bookData['gener'] = $books['gener']['name'];
+        $i = 1;
         if (isset($books['reviews'])) {
             foreach ($books['reviews'] as $reviews) {
                 $bookData['reviews'][$i]['rating'] = $reviews['rating'];
                 $bookData['reviews'][$i]['comment'] = $reviews['comment'];
-                $bookData['reviews'][$i]['userName'] = Review::getUserName($reviews['user_id']);
+                $bookData['reviews'][$i]['userName'] = Review::getUserName($reviews['user_id'])['name'];
                 $i++;
             }
         }

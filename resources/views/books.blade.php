@@ -17,17 +17,11 @@
                     <div class="row">
                         <div class="md-col-6">
                             <h3 class="card-title">{{ $bookData['bookName'] }}</h3>
-                            <img src="{{ $bookData['bookImage'] }}" class="card-img-top" alt="image" height="1000px" />
+                            <img src="{{ $bookData['bookImage'] }}" class="card-img-top" alt="image" height="800px" />
                         </div>
                         <div class="md-col-6">
                             <p class="card-text"><strong>Author:- </strong>
-                                <?php $a = ''; ?>
-                                @if (count($bookData['bookAuthor']))
-                                    @foreach ($bookData['bookAuthor'] as $author)
-                                        <?php $a .= $author['name'] . ', '; ?>
-                                    @endforeach
-                                @endif
-                                {{ rtrim($a, ', ') }}
+                                        {{ $bookData['bookAuthor']}}
                             </p>
                             <p class="card-text"><strong>Gener:- </strong> {{ $bookData['gener'] }}</p>
                             <p class="card-text"><strong>Category:- </strong>{{ $bookData['category'] }} </p>
@@ -45,9 +39,9 @@
                                 <p class="card-text"><strong>Review: </strong>
                                     @foreach ($bookData['reviews'] as $review)
                                         <br>
-                                        <img src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-WwYlkTYt_qTRBBCDQtR5vDgiG0YlkofGEc250L5GRQ&usqp=CAU&ec=48665701"
                                             alt="" height="30px">
-                                        {{ $review['userName']['name'] }}
+                                        {{ $review['userName'] }}
                                         <br>
                                         @for ($i = 1; $i <= $review['rating']; $i++)
                                             @if ($i > 5)
@@ -67,7 +61,7 @@
                     </div>
                 </div>
                 <div class="d-grid  d-md-block">
-                    <a href="{{ url('review/' . $bookData['bookId']) }}" class="btn btn-primary btn-md" role="button">Give
+                    <a href="{{ url('review/' . encrypt($bookData['bookId'])) }}" class="btn btn-primary btn-md" role="button">Give
                         Review</a>
                 </div>
             </div>

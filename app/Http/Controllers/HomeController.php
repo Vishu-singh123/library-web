@@ -28,21 +28,19 @@ class HomeController extends Controller
         $books = Book::with(['authors', 'gener'])->get();
         $allBookData = [];
         $a = 0;
-            foreach ($books as $book) {
-                $allBookData[$a]['bookId'] =Helper::encrypt($book['id']);
-                $allBookData[$a]['bookName'] = $book['name'];
-                $allBookData[$a]['bookImage'] = $book['image'];
-                $i = 0;
-                $j = 0;
-                if (isset($book['authors'])) {
-                    foreach ($book['authors'] as $authors) {
-                        $allBookData[$a]['bookAuthor'][$j]['name'] = $authors['name'];
-                        $j++;
-                    }
+        foreach ($books as $book) {
+            $allBookData[$a]['bookId'] = encrypt($book['id']);
+            $allBookData[$a]['bookName'] = $book['name'];
+            $allBookData[$a]['bookImage'] = $book['image'];
+            if (isset($book['authors'])) {
+                $name = [];
+                foreach ($book['authors'] as $authors) {
+                    array_push($name, $authors['name']);
                 }
-                $allBookData[$a]['bookGener'] = $book['gener']['name'];
-                $a++;
             }
+            $allBookData[$a]['bookAuthor'] = implode(', ', $name);
+            $a++;
+        }
         return view('allbooks', compact('allBookData'));
     }
 }

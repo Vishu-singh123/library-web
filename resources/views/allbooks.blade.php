@@ -2,19 +2,23 @@
 
 @section('content')
     <div class="container">
+        {{-- {{dd($allBookData)}} --}}
         <h1>Book List</h1>
         <div class="row">
             @foreach ($allBookData as $data => $item)
-                <div class="col-md-4">
-                    <a href="{{ 'bookdetail/' . $item['bookId'] }}">
+                {{-- {{dd($item['bookAuthor'])}} --}}
+                <div class="col-md-3">
+                    <a href="{{ 'bookdetail/' . encrypt($item['bookId']) }}">
                         <div class="card mb-4">
                             <img src="{{ $item['bookImage'] }}" class="card-img-top" alt="image" height="500px" />
                             <div class="card-body">
                                 <h3 class="card-title">{{ $item['bookName'] }}</h3>
                                 <p class="card-text"><strong>Author:-</strong>
-                                    @foreach ($item['bookAuthor'] as $author)
-                                        {{ trim($author['name'], ", ") }},
-                                    @endforeach
+
+                                        {{-- {{dd($item['bookAuthor'][1])}} --}}
+                                    
+
+                                    {{$item['bookAuthor']}} 
                                 </p>
                             </div>
                         </div>
