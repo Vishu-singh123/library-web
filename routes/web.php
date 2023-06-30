@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BuyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,4 @@ Route::get('bookdetail/{id}',[BookController::class, "details"])->name('book-det
 Route::get('category',[CategoryController::class, "index"]);
 Route::get('review/{id}',[ReviewController::class, "index"])->middleware('auth');
 Route::post('review',[ReviewController::class, "reviewstore"])->name('review.store')->middleware('auth');
+Route::get('buynow', [BuyController::class, 'buynow']);

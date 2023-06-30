@@ -19,9 +19,10 @@ class BookController extends Controller
         $a = 0;
 
         foreach ($books as $book) {
-            $allBookData[$a]['bookId'] = $book['id'];
+            $allBookData[$a]['bookId'] = encrypt($book['id']);
             $allBookData[$a]['bookName'] = $book['name'];
             $allBookData[$a]['bookImage'] = $book['image'];
+            $allBookData[$a]['price'] = $book['price'];
             if (isset($book['authors'])) {
                 $name = [];
                 foreach ($book['authors'] as $authors) {
@@ -37,7 +38,9 @@ class BookController extends Controller
     }
     public function details($id)
     {
-        // dd(Helper::decrypt($id));
+        // dd(decrypt($id));
+        // $a = encrypt('1');
+        // dd(decrypt($a));
         $books = Book::where('id', decrypt($id))->with(['authors', 'category', 'gener', 'reviews'])->first();
         $averageRating = Review::where('Book_id', decrypt($id))->avg('rating');
         // dd($books);

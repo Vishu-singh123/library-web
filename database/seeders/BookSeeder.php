@@ -22,6 +22,7 @@ class BookSeeder extends Seeder
             DB::table("books")->insert([
                 "name" => $faker->name(), 
                 "image" => $faker->imageUrl(), 
+                "price" => mt_rand(500, 1000),
                 'category_id' => $faker->randomElement(Category::pluck('id')),
                 'geners_id' => $faker->randomElement(Gener::pluck('id')),
                 'created_at' => now()->toDateTimeString(),

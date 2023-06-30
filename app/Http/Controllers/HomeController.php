@@ -30,6 +30,7 @@ class HomeController extends Controller
         $a = 0;
         foreach ($books as $book) {
             $allBookData[$a]['bookId'] = encrypt($book['id']);
+            $allBookData[$a]['price'] = $book['price'];
             $allBookData[$a]['bookName'] = $book['name'];
             $allBookData[$a]['bookImage'] = $book['image'];
             if (isset($book['authors'])) {

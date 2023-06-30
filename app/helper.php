@@ -13,7 +13,7 @@ if (!function_exists('encrypt')) {
 if (!function_exists('decrypt')) {
     function decrypt($id)
     {
-        $crypt_key = Crypt::decryptString($id);
-        return $crypt_key;
+        $decrypted = Crypt::decryptString($id);
+        return $decrypted;
     }
 }
