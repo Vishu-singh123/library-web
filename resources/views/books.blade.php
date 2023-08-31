@@ -21,7 +21,7 @@
                         </div>
                         <div class="md-col-6">
                             <p class="card-text"><strong>Author:- </strong>
-                                        {{ $bookData['bookAuthor']}}
+                                {{ $bookData['bookAuthor'] }}
                             </p>
                             <p class="card-text"><strong>Gener:- </strong> {{ $bookData['gener'] }}</p>
                             <p class="card-text"><strong>Category:- </strong>{{ $bookData['category'] }} </p>
@@ -61,7 +61,8 @@
                     </div>
                 </div>
                 <div class="d-grid  d-md-block">
-                    <a href="{{ url('review/' . encrypt($bookData['bookId'])) }}" class="btn btn-primary btn-md" role="button">Give
+                    <a href="{{ url('review/' . encrypt($bookData['bookId'])) }}" class="btn btn-primary btn-md"
+                        role="button">Give
                         Review</a>
                 </div>
             </div>
